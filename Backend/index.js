@@ -1,12 +1,13 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-
+import cors from 'cors';
 import userRouter from './route/user.route.js';
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 // Error handling middleware for parsing JSON
 app.use((err, req, res, next) => {

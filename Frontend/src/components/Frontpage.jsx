@@ -1,16 +1,10 @@
 import React from 'react'
-import { useForm } from "react-hook-form"
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-
+// import { useForm } from "react-hook-form"
+// import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import Login from './Login'
 
 function Frontpage() {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const navigate = useNavigate();
 
-    const onSubmit = (data) => {
-        console.log(data);
-        navigate('/front-page'); // Navigate after form submission
-    };
     return (
 
 
@@ -27,21 +21,8 @@ function Frontpage() {
                 <div className="modal" role="dialog">
                     <div className="modal-box">
                         <h3 className="font-bold text-lg">Hello!</h3>
-                        <form onSubmit={handleSubmit(onSubmit)}>
-                            {/* register your input into the hook by invoking the "register" function */}
-                            <input placeholder="username" {...register("example", { required: true })} />
-                            {errors.exampleRequired && <span>This field is required</span>}
-                            {/* include validation with required or other standard HTML validation rules */}
-                            <input placeholder="email" type='email' {...register("exampleRequired", { required: true })} className="modal-action" />
-                            {/* errors will return when field validation fails  */}
-                            {errors.exampleRequired && <span>This field is required</span>}
-                            <input placeholder="password" type='password' {...register("exampleRequired", { required: true })} className="modal-action" />
-                            {errors.exampleRequired && <span>This field is required</span>}
-                            <button htmlFor="my_modal_6" type="submit" className="modal-action"  >Submit </button>
-                            <div className="modal-action">
-                                <label htmlFor="my_modal_6" className="btn">Close!</label>
-                            </div>
-                        </form>
+
+                        <Login />
 
                     </div>
                 </div>
