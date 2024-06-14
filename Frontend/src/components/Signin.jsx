@@ -1,68 +1,69 @@
-import React from 'react'
-import { useForm } from "react-hook-form"
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 function Signin() {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
-        const existingUser = {
+        const userInfo = {
             email: data.email,
             password: data.password
         }
 
-        await axios.get('http://localhost:3000/get/users', existingUser)
+        console.log(userInfo);
+
+        await axios.get('http://localhost:3000/get/users', { email: userInfo.email, password: userInfo.password })
             .then((response) => {
-                alert(JSON.stringify(response.data)); // Use JSON.stringify to view the response object
+                console.log(response);
+
             })
             .catch((error) => {
-                alert(error);
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    console.error("Data:", error.response.data);
+                    console.error("Status:", error.response.status);
+                    console.error("Headers:", error.response.headers);
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    console.error("Request:", error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.error("Error Message:", error.message);
+                }
+                console.error("Config:", error.config);
             });
-
-        // await axios.get('http://localhost:3000/get/users', existingUser)
-        //     .then((response) => {
-        //         alert(response);
-        //     })
-        //     .catch((error) => {
-        //         alert(error);
-        //     });
         // navigate('/front-page'); // Navigate after form submission
     };
+
+
     return (
-        <div>
-            <div className='pt-10 items-center justify-center flex'>
-
-                <label htmlFor="my_modal_6" className="btn">login</label>
-                {/* Put this part before </body> tag */}
-                <input type="checkbox" id="my_modal_6" className="modal-toggle" />
-                <div className="modal" role="dialog">
-                    <div className="modal-box">
-                        <h3 className="font-bold text-lg">pls login </h3>
-
-
-
-                        <form onSubmit={handleSubmit(onSubmit)}>
-
-                            <input placeholder="email" type='email' {...register("email", { required: true })} className="modal-action" />
-                            {/* errors will return when field validation fails  */}
-                            {errors.exampleRequired && <span>This field is required</span>}
-                            <input placeholder="password" type='password' {...register("password", { required: true })} className="modal-action" />
-                            {errors.exampleRequired && <span>This field is required</span>}
-                            <button htmlFor="my_modal_6" type="submit" className="modal-action"  >Submit </button>
-                            <div>
-                                If you have not  an account then <Link to="/">signin</Link>
-                            </div>
-                            {/* <button type="submit" className="modal-action" >Submit </button> */}
-                            <div className="modal-action">
-                                <label htmlFor="my_modal_6" className="btn">Close!</label>
-                            </div>
-                        </form>
-                    </div>
+        <div className='pt-10 items-center justify-center flex'>
+            <label htmlFor="my_modal_6" className="btn">login</label>
+            <input type="checkbox" id="my_modal_6" className="modal-toggle" />
+            <div className="modal" role="dialog">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg">Please login</h3>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <input placeholder="email" type='email' {...register("email", { required: true })} className="modal-action" />
+                        {errors.email && <span>This field is required</span>}
+                        <input placeholder="password" type='password' {...register("password", { required: true })} className="modal-action" />
+                        {errors.password && <span>This field is required</span>}
+                        <button htmlFor="my_modal_6" type="submit" className="modal-action">Submit</button>
+                        <div>
+                            If you do not have an account then <Link to="/">signup</Link>
+                        </div>
+                        <div className="modal-action">
+                            <label htmlFor="my_modal_6" className="btn">Close!</label>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default Signin
+export default Signin;
