@@ -14,10 +14,16 @@ function Signin() {
         }
 
         console.log(userInfo);
+        // localStorage.setItem('loginCredentials', JSON.stringify(data));
 
-        await axios.get('http://localhost:3000/get/users', { email: userInfo.email, password: userInfo.password })
+        await axios.post('http://localhost:3000/get/users', userInfo)
             .then((response) => {
-                console.log(response);
+                const userdata = response.data;
+                console.log(userdata);
+                if (response.data && response.data.user) {
+                    localStorage.setItem('userData', JSON.stringify(response.data.user));
+                    navigate('/front-page');
+                }
 
             })
             .catch((error) => {

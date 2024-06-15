@@ -20,10 +20,15 @@ function Login() {
         }
 
         console.log(userInfo);
+        localStorage.setItem('loginCredentials', JSON.stringify({ userInfo }));
 
         await axios.post('http://localhost:3000/signup/user', userInfo)
             .then((response) => {
                 console.log(response);
+                // if (response.data && response.data.user) {
+                //     localStorage.setItem('userData', JSON.stringify(response.data.userInfo));
+                //     // navigate('/front-page');
+                // }
             })
             .catch((error) => {
                 if (error.response) {
