@@ -4,6 +4,8 @@ import React from 'react'
 // define "lord-icon" custom element with default properties
 function Navbar() {
 
+
+
     return (
         <div><div className="navbar bg-base-100">
             <div className="flex-1">
