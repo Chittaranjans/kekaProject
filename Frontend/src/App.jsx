@@ -1,29 +1,31 @@
-import { useState } from 'react';
+import React, { useState } from 'react'; // Add React and useState import
 import Navbar from './components/Navbar';
 import Frontpage from './components/Frontpage';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import Routes
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Bord from './components/Bord';
 import Signin from './components/Signin';
 import Login from './components/Login';
 import { useAuth } from './components/context.jsx';
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [userData, setUserData] = useAuth();
-  console.log(userData)
+  const auth = useAuth();
+  const [count, setCount] = useState(0); // Ensure useState is imported from 'react'
+  const [userData, setUserData] = useAuth(); // Correct usage of custom hook
+  console.log(auth);
+  console.log(userData);
 
   return (
     <>
       <Navbar />
-      <Router>
-        <Routes> {/* Wrap Route with Routes */}
-          <Route path='/' element={<Frontpage />} />
-          <Route path='/front-page' element={<Bord />} />
-          {/* Use element prop instead of component */}
-          <Route path='/login' element={<Signin />} />
-          <Route path='/signin' element={<Login />} />
-        </Routes>
-      </Router>
+
+      <Routes>
+        <Route path='/' element={<Frontpage />} />
+        <Route path='/front-page' element={userData ? <Bord /> : <Navigate to="/" replace />} />
+        {/* Added replace prop to Navigate for better navigation handling */}
+        <Route path='/login' element={<Signin />} />
+        <Route path='/signin' element={<Login />} />
+      </Routes>
+
     </>
   );
 }

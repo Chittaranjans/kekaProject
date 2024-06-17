@@ -1,13 +1,29 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from './context';
 
 
-// define "lord-icon" custom element with default properties
+
 function Navbar() {
+    const [userData, setUserData] = useAuth(); // Destructure userData and setUserData from context
 
+    const navigate = useNavigate();
+
+
+    const { logout } = useAuth(); // Destructure logout from useAuth
+
+    const handleLogout = () => {
+        if (logout) {
+            localStorage.removeItem('userData'); // Remove user data from localStorage
+            setUserData(undefined); // Update context state to undefined
+        };
+        // Call logout from context
+        navigate('/'); // Navigate to login page
+    };
 
 
     return (
-        <div><div className="navbar bg-base-100">
+        <div className="navbar bg-base-100">
             <div className="flex-1">
                 <a className="btn btn-ghost text-xl">Keka@</a>
             </div>
@@ -36,11 +52,11 @@ function Navbar() {
                             </a>
                         </li>
                         <li><a>Settings</a></li>
-                        <li><a>Logout</a></li>
+                        <li><a onClick={handleLogout}>Logout</a></li>
                     </ul>
                 </div>
             </div>
-        </div></div>
+        </div>
     )
 }
 

@@ -2,8 +2,12 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Signin() {
+
+    const notify = () => toast("Logged in successfully!");
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
@@ -19,10 +23,12 @@ function Signin() {
         await axios.post('http://localhost:3000/get/users', userInfo)
             .then((response) => {
                 const userdata = response.data;
-                console.log(userdata);
+
+
                 if (response.data && response.data.user) {
                     localStorage.setItem('userData', JSON.stringify(response.data.user));
                     navigate('/front-page');
+
                 }
 
             })
