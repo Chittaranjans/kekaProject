@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './context';
 
@@ -10,7 +10,7 @@ function Navbar() {
     const navigate = useNavigate();
 
 
-    const { logout } = useAuth(); // Destructure logout from useAuth
+    // const { logout } = useAuth(); // Destructure logout from useAuth
 
     const handleLogout = () => {
         if (logout) {
@@ -21,6 +21,12 @@ function Navbar() {
         navigate('/'); // Navigate to login page
     };
 
+    const [isLoggedIn, logout] = useState(false);
+
+
+    const login = () => {
+        navigate('/login');
+    }
 
     return (
         <div className="navbar bg-base-100">
@@ -32,7 +38,9 @@ function Navbar() {
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
                         <div className="indicator">
-                            <div className="h-5 w-5 flex text-center justify-center" stroke="currentColor">Login</div>
+                            {isLoggedIn ? <div className="h-5 w-5 flex text-center justify-center" stroke="currentColor" onClick={handleLogout} >Logout</div> :
+                                (<div className="h-5 w-5 flex text-center justify-center" stroke="currentColor" onClick={login}  >Login</div>
+                                )}
 
                         </div>
                     </div>

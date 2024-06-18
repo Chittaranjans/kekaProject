@@ -15,10 +15,10 @@ export function UserProvider({ children }) {
         }
     }, []);
 
-    const logout = () => {
-        localStorage.removeItem('userData'); // Remove user data from localStorage
-        setUserData(undefined); // Update context state to undefined
-    };
+    // const logout = () => {
+    //     localStorage.removeItem('userData'); // Remove user data from localStorage
+    //     setUserData(undefined); // Update context state to undefined
+    // };
 
     return (
         <UserContext.Provider value={[userData, setUserData]} >
