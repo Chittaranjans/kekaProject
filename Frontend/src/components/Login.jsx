@@ -25,6 +25,7 @@ function Login() {
         await axios.post('http://localhost:3000/signup/user', userInfo)
             .then((response) => {
                 console.log(response);
+                window.location.reload();
                 // if (response.data && response.data.user) {
                 //     localStorage.setItem('userData', JSON.stringify(response.data.userInfo));
                 //     // navigate('/front-page');

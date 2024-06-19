@@ -23,11 +23,13 @@ function Signin() {
         await axios.post('http://localhost:3000/get/users', userInfo)
             .then((response) => {
                 const userdata = response.data;
+                window.location.reload();
 
 
                 if (response.data && response.data.user) {
                     localStorage.setItem('userData', JSON.stringify(response.data.user));
                     navigate('/front-page');
+                    window.location.reload();
 
                 }
 
