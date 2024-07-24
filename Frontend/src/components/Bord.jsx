@@ -4,7 +4,7 @@ import HashLoader from "react-spinners/HashLoader";
 
 function Bord() {
     let [loading, setLoading] = useState(false);
-
+ 
     useEffect(() => {
         setLoading(true);
         setTimeout(() => {

@@ -11,7 +11,6 @@ function App() {
   const auth = useAuth();
   const [count, setCount] = useState(0); // Ensure useState is imported from 'react'
   const [userData, setUserData] = useAuth();
-  // window.location.reload();
   console.log(auth);
   console.log(userData);
 
