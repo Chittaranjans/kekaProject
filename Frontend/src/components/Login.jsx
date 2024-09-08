@@ -22,7 +22,7 @@ function Login() {
         console.log(userInfo);
         localStorage.setItem('loginCredentials', JSON.stringify({ userInfo }));
 
-        await axios.post('https://keka-project.vercel.app/signup/user', userInfo)
+        await axios.post('https://keka-project.vercel.app/signup/user', userInfo, { withCredentials: true })
             .then((response) => {
                 console.log(response);
                 window.location.reload();
