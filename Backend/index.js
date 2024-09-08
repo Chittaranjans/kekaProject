@@ -11,6 +11,8 @@ app.use(cors(
   {
     origin: 'https://projectchittaranjan.vercel.app',
     credentials: true,
+
+
   }
 ));
 
@@ -32,7 +34,7 @@ app.use((err, req, res, next) => {
 });
 
 // Step 5: Adding a simplified test route
-app.get('/get', (req, res) => {
+app.get('/', (req, res) => {
   res.send({ message: 'Test route works' });
 });
 
