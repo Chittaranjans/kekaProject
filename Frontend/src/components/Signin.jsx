@@ -28,7 +28,7 @@ function Signin() {
 
                 if (response.data && response.data.user) {
                     localStorage.setItem('userData', JSON.stringify(response.data.user));
-                    navigate('/bord');
+                    navigate('/useraccount');
                     window.location.reload();
 
                 }
