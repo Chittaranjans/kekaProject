@@ -20,7 +20,7 @@ function App() {
 
       <Routes>
         <Route path='/' element={<Frontpage />} />
-        <Route path='/front-page' element={userData ? <Bord /> : <Navigate to="/" replace />} />
+        <Route path='/bord' element={userData ? <Bord /> : <Navigate to="/" replace />} />
         {/* Added replace prop to Navigate for better navigation handling */}
         <Route path='/login' element={<Signin />} />
         <Route path='/signin' element={<Login />} />
