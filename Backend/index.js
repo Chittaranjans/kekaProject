@@ -8,12 +8,12 @@ const app = express();
 
 app.use(express.json());
 app.use(cors(
-  {
-    origin: 'https://projectchittaranjan.vercel.app',
-    credentials: true,
+  // {
+  //   origin: 'https://projectchittaranjan.vercel.app',
+  //   credentials: true,
 
 
-  }
+  // }
 ));
 
 // Error handling middleware for parsing JSON
