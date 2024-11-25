@@ -23,6 +23,7 @@ function Signin() {
         await axios.post('https://keka-project.vercel.app/get/users', userInfo, { withCredentials: true })
             .then((response) => {
                 const userdata = response.data;
+                window.location.reload();
             
               if (response.data && response.data.user) {
                     localStorage.setItem('userData', JSON.stringify(response.data.user));
