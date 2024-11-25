@@ -10,7 +10,8 @@ app.use(express.json());
 app.use(cors(
   {
     origin: 'https://projectchittaranjan.vercel.app',
-    credentials: true,
+    methods: ["POST" , "GET"] ,
+    credentials: true
 
 
   }
