@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(cors(
   {
-    origin: 'https://projectchittaranjan.vercel.app',
+    origin: 'https://keka-project-kg2x.vercel.app/',
     methods: ["POST" , "GET"] ,
     credentials: true
 
